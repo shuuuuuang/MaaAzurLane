@@ -31,6 +31,8 @@ Validate Maa pipeline JSON files:
 python tools/validate_pipeline.py
 ```
 
+This also validates the basic structure of `interface.json`.
+
 Run Python tests:
 
 ```powershell
