@@ -32,6 +32,17 @@ screen. The runtime should:
 3. Resolve page anchors and target regions.
 4. Map logical coordinates into the detected content region only as fallback.
 
+## Layout Profile
+
+A layout profile records:
+
+- Screenshot size.
+- Detected game content region.
+- Detection source, such as `auto` or `manual`.
+
+Profiles let the runtime reuse a previously detected region and make future
+anchor detection cheaper and more stable.
+
 ## Layout Levels
 
 - L1: 16:9 multi-resolution support.
