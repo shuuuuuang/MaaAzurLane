@@ -1,23 +1,32 @@
 {
-  "controller": {
-    "name": "MaaAzurLane",
-    "version": "0.1.0"
-  },
+  "interface_version": 2,
   "resource": [
-    "resource"
+    {
+      "name": "MaaAzurLane",
+      "path": "resource"
+    }
+  ],
+  "controller": [
+    {
+      "name": "adb",
+      "type": "Adb"
+    }
   ],
   "task": [
     {
       "name": "Startup",
-      "entry": "Startup"
+      "entry": "Startup",
+      "group": "System"
     },
     {
       "name": "ReturnHome",
-      "entry": "ReturnHome"
+      "entry": "ReturnHome",
+      "group": "System"
     },
     {
       "name": "DailyBaseline",
-      "entry": "DailyBaseline"
+      "entry": "DailyBaseline",
+      "group": "Daily"
     }
   ]
 }
