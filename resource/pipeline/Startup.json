@@ -1,0 +1,9 @@
+{
+  "Startup": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "next": [
+      "ReturnHome"
+    ]
+  }
+}

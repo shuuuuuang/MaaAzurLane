@@ -1,0 +1,9 @@
+{
+  "DailyBaseline": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "next": [
+      "ReturnHome"
+    ]
+  }
+}

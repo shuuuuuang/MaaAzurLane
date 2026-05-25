@@ -1,0 +1,24 @@
+name: Resolution support
+description: Report a resolution or aspect-ratio compatibility issue.
+title: "[Resolution]: "
+labels: ["resolution"]
+body:
+  - type: input
+    id: resolution
+    attributes:
+      label: Resolution
+      placeholder: 2400x1080
+    validations:
+      required: true
+  - type: input
+    id: aspect
+    attributes:
+      label: Aspect ratio
+      placeholder: 20:9
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Which page or task failed?
+    validations:
+      required: true

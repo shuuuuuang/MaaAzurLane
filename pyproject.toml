@@ -1,0 +1,18 @@
+[project]
+name = "maa-azurlane"
+version = "0.1.0"
+description = "MaaFramework-based automation project for Azur Lane."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "GPL-3.0-only" }
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

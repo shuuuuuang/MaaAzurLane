@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test tools
+        run: python -m pip install --upgrade pip pytest ruff
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Validate pipeline JSON
+        run: python tools/validate_pipeline.py
+
+      - name: Test
+        run: pytest

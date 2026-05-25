@@ -1,0 +1,27 @@
+name: Bug report
+description: Report a reproducible problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened?
+    validations:
+      required: true
+  - type: input
+    id: resolution
+    attributes:
+      label: Resolution
+      placeholder: 1920x1080
+  - type: input
+    id: emulator
+    attributes:
+      label: Emulator or device
+      placeholder: MuMu 12 / Android phone
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Attach relevant logs, screenshots, or replay files.

@@ -1,0 +1,1 @@
+"""Custom recognizers for MaaAzurLane."""

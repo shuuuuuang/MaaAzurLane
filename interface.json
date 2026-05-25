@@ -1,0 +1,23 @@
+{
+  "controller": {
+    "name": "MaaAzurLane",
+    "version": "0.1.0"
+  },
+  "resource": [
+    "resource"
+  ],
+  "task": [
+    {
+      "name": "Startup",
+      "entry": "Startup"
+    },
+    {
+      "name": "ReturnHome",
+      "entry": "ReturnHome"
+    },
+    {
+      "name": "DailyBaseline",
+      "entry": "DailyBaseline"
+    }
+  ]
+}

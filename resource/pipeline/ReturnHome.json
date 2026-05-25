@@ -1,0 +1,6 @@
+{
+  "ReturnHome": {
+    "recognition": "DirectHit",
+    "action": "DoNothing"
+  }
+}
