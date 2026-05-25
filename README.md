@@ -28,6 +28,11 @@ The first public milestone focuses on:
 Large-scale Operation Siren automation, intelligent scheduling, MCP service,
 custom OCR models, GPU inference, and emulator management are long-term goals.
 
+## Development
+
+See [docs/development.md](docs/development.md) for local setup and validation
+commands.
+
 ## Status
 
 This repository is in the planning and scaffolding stage.
