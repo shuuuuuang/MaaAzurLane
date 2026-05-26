@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "page": "home",
+  "logical_size": {
+    "width": 1280,
+    "height": 720
+  },
+  "anchors": [
+    {
+      "name": "home.bottom_menu",
+      "page": "home",
+      "kind": "manual",
+      "logical_region": {
+        "x": 0,
+        "y": 620,
+        "width": 1280,
+        "height": 100
+      },
+      "description": "Bottom navigation area used as a home-page layout anchor.",
+      "tags": [
+        "home",
+        "navigation"
+      ]
+    },
+    {
+      "name": "home.battle_entry",
+      "page": "home",
+      "kind": "ocr",
+      "text": "出击",
+      "logical_region": {
+        "x": 1010,
+        "y": 560,
+        "width": 220,
+        "height": 120
+      },
+      "description": "Battle entry button search area.",
+      "tags": [
+        "home",
+        "sortie"
+      ]
+    }
+  ]
+}
