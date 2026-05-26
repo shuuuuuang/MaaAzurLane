@@ -23,6 +23,54 @@ Record:
 - Game content region if known.
 - Important anchors and OCR regions.
 
+Each screenshot should have a JSON sidecar with the same base name:
+
+```text
+home_cn_2400x1080_mumu12_001.png
+home_cn_2400x1080_mumu12_001.json
+```
+
+Minimal metadata:
+
+```json
+{
+  "schema_version": 1,
+  "image": "home_cn_2400x1080_mumu12_001.png",
+  "page": "home",
+  "server": "cn",
+  "language": "zh-CN",
+  "device": "Windows",
+  "emulator": "MuMu 12",
+  "screenshot_size": {
+    "width": 2400,
+    "height": 1080
+  },
+  "game_region": {
+    "x": 240,
+    "y": 0,
+    "width": 1920,
+    "height": 1080
+  },
+  "tags": [
+    "home",
+    "20:9"
+  ],
+  "notes": ""
+}
+```
+
+Validate metadata without requiring the image file:
+
+```powershell
+python tools/replay_screenshot.py --metadata-only
+```
+
+Validate metadata and require image files:
+
+```powershell
+python tools/replay_screenshot.py tests/screenshots
+```
+
 ## Privacy
 
 Contributors should remove or mask account-private information before sharing
