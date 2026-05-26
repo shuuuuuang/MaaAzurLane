@@ -13,9 +13,9 @@ dist/
 *.egg-info/
 
 # Local runtime data
-logs/
-screenshots/
-captures/
+/logs/
+/screenshots/
+/captures/
 *.log
 
 # IDE

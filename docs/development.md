@@ -45,6 +45,12 @@ Run lint checks:
 python -m ruff check .
 ```
 
+Validate screenshot replay metadata:
+
+```powershell
+python tools/replay_screenshot.py --metadata-only
+```
+
 ## Current Notes
 
 - Pipeline files are placeholders until MaaFramework runtime integration is
