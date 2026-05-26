@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
   pull_request:
 
@@ -23,6 +24,9 @@ jobs:
 
       - name: Validate pipeline JSON
         run: python tools/validate_pipeline.py
+
+      - name: Validate screenshot replay metadata
+        run: python tools/replay_screenshot.py --metadata-only
 
       - name: Test
         run: pytest
