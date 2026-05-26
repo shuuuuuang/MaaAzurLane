@@ -43,6 +43,15 @@ A layout profile records:
 Profiles let the runtime reuse a previously detected region and make future
 anchor detection cheaper and more stable.
 
+## Anchors
+
+Anchors describe stable UI targets in logical coordinates. They are not final
+click coordinates by themselves. Runtime code should resolve an anchor through
+OCR, template matching, feature matching, color checks, or manual fallback, then
+map it into the current game content region.
+
+Anchor definitions live under `resource/config/anchors`.
+
 ## Layout Levels
 
 - L1: 16:9 multi-resolution support.
