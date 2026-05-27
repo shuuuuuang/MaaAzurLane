@@ -187,9 +187,7 @@ class LayoutBuilder:
         if native_roi.is_empty():
             raise ValueError(f"calibration item {item.id} requires non-empty roi")
         image = _image_path_for(item)
-        variant_paths = [
-            f"image/{variant}.png" for variant in variants or []
-        ]
+        variant_paths = [f"{variant}.png" for variant in variants or []]
         return LayoutElement(
             id=item.id,
             category=item.category,
@@ -203,7 +201,7 @@ class LayoutBuilder:
         image_dir = target_dir / "image"
         image_dir.mkdir(parents=True)
         for relative_path, image_bytes in self._images.items():
-            path = target_dir / relative_path
+            path = image_dir / relative_path
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(image_bytes)
         layout_path = target_dir / "layout.json"
@@ -228,7 +226,7 @@ def _image_path_for(item: CalibrationItem) -> str | None:
         return None
     if not item.reference_image:
         return None
-    return f"image/{item.reference_image}"
+    return item.reference_image
 
 
 def _rect_to_dict(rect: Rect) -> dict[str, int]:
