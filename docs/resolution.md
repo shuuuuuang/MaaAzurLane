@@ -32,6 +32,18 @@ screen. The runtime should:
 3. Resolve page anchors and target regions.
 4. Map logical coordinates into the detected content region only as fallback.
 
+## Coordinate Spaces
+
+MaaAzurLane uses explicit coordinate-space names:
+
+- `NativeSpace`: original screenshot and touch coordinates.
+- `Maa720Space`: MaaFramework's height-720 equivalent recognition space.
+- `LogicalSpace`: project reference design coordinates, currently 1280x720.
+- `ContentSpace`: detected game content region inside the native screenshot.
+
+Do not assume `Maa720Space` is always 1280x720. For a 2400x1080 device, it is
+1600x720. For a 2048x1536 device, it is 960x720.
+
 ## Layout Profile
 
 A layout profile records:

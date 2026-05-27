@@ -16,6 +16,7 @@ dist/
 /logs/
 /screenshots/
 /captures/
+/user_data/
 *.log
 
 # IDE
