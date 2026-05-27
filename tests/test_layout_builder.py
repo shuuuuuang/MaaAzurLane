@@ -1,7 +1,8 @@
 import json
+from io import BytesIO
 from pathlib import Path
 
-import pytest
+from PIL import Image
 
 from maa_azurlane.calibration import CalibrationManifest, LayoutBuilder
 from maa_azurlane.layout import Rect, Size
@@ -17,7 +18,8 @@ def test_layout_builder_writes_layout_and_template(tmp_path: Path) -> None:
         output_root=tmp_path,
     )
 
-    builder.add_template(item, Rect(1010, 560, 220, 120), b"png-bytes")
+    image_bytes = _make_png((22, 12))
+    builder.add_template(item, Rect(1010, 560, 220, 120), image_bytes)
     output_dir = builder.flush()
 
     layout = json.loads((output_dir / "layout.json").read_text(encoding="utf-8"))
@@ -30,7 +32,7 @@ def test_layout_builder_writes_layout_and_template(tmp_path: Path) -> None:
         "maa720p": {"x": 1010, "y": 560, "w": 220, "h": 120},
         "image": "main/btn_campaign.png",
     }
-    assert (output_dir / "image/main/btn_campaign.png").read_bytes() == b"png-bytes"
+    assert _png_size(output_dir / "image/main/btn_campaign.png") == (22, 12)
 
 
 def test_layout_builder_uses_scaler_for_non_720p_templates(
@@ -51,7 +53,7 @@ def test_layout_builder_uses_scaler_for_non_720p_templates(
         template_scaler=scaler,
     )
 
-    builder.add_template(item, Rect(1515, 840, 330, 180), b"png-bytes")
+    builder.add_template(item, Rect(1515, 840, 330, 180), _make_png((33, 18)))
     output_dir = builder.flush()
     layout = json.loads((output_dir / "layout.json").read_text(encoding="utf-8"))
 
@@ -64,19 +66,49 @@ def test_layout_builder_uses_scaler_for_non_720p_templates(
     }
     assert (
         output_dir / "image/main/btn_campaign.png"
-    ).read_bytes() == b"png-bytes-scaled"
+    ).read_bytes().endswith(b"-scaled")
 
 
-def test_layout_builder_requires_scaler_for_non_720p_template() -> None:
+def test_layout_builder_resizes_non_720p_template_by_default(
+    tmp_path: Path,
+) -> None:
     manifest = CalibrationManifest.load(Path("reference/calibration.json"))
     builder = LayoutBuilder(
         "device-1080p",
         Size(1920, 1080),
         manifest_version=manifest.version,
+        output_root=tmp_path,
     )
 
-    with pytest.raises(RuntimeError, match="template_scaler"):
-        builder.add_template(manifest.items[0], Rect(1515, 840, 330, 180), b"png")
+    builder.add_template(
+        manifest.items[0],
+        Rect(1515, 840, 330, 180),
+        _make_png((33, 18)),
+    )
+    output_dir = builder.flush()
+
+    assert _png_size(output_dir / "image/main/btn_campaign.png") == (22, 12)
+
+
+def test_layout_builder_resizes_wide_screen_template_by_height_scale(
+    tmp_path: Path,
+) -> None:
+    manifest = CalibrationManifest.load(Path("reference/calibration.json"))
+    builder = LayoutBuilder(
+        "device-2400x1080",
+        Size(2400, 1080),
+        manifest_version=manifest.version,
+        output_root=tmp_path,
+    )
+
+    builder.add_template(
+        manifest.items[0],
+        Rect(1515, 840, 330, 180),
+        _make_png((45, 18)),
+    )
+    output_dir = builder.flush()
+
+    assert _png_size(output_dir / "image/main/btn_campaign.png") == (30, 12)
 
 
 def test_layout_builder_replaces_existing_layout_atomically(tmp_path: Path) -> None:
@@ -88,7 +120,11 @@ def test_layout_builder_replaces_existing_layout_atomically(tmp_path: Path) -> N
         manifest_version=manifest.version,
         output_root=tmp_path,
     )
-    first.add_template(item, Rect(1010, 560, 220, 120), b"old")
+    first.add_template(
+        item,
+        Rect(1010, 560, 220, 120),
+        _make_png((22, 12), "red"),
+    )
     output_dir = first.flush()
 
     second = LayoutBuilder(
@@ -97,7 +133,11 @@ def test_layout_builder_replaces_existing_layout_atomically(tmp_path: Path) -> N
         manifest_version=manifest.version,
         output_root=tmp_path,
     )
-    second.add_template(item, Rect(1000, 550, 200, 100), b"new")
+    second.add_template(
+        item,
+        Rect(1000, 550, 200, 100),
+        _make_png((20, 10), "blue"),
+    )
     output_dir = second.flush()
 
     layout = json.loads((output_dir / "layout.json").read_text(encoding="utf-8"))
@@ -107,7 +147,7 @@ def test_layout_builder_replaces_existing_layout_atomically(tmp_path: Path) -> N
         "w": 200,
         "h": 100,
     }
-    assert (output_dir / "image/main/btn_campaign.png").read_bytes() == b"new"
+    assert _png_size(output_dir / "image/main/btn_campaign.png") == (20, 10)
 
 
 def test_calibration_layout_builds_pipeline_overrides() -> None:
@@ -118,7 +158,11 @@ def test_calibration_layout_builds_pipeline_overrides() -> None:
         manifest_version=manifest.version,
     )
 
-    builder.add_template(manifest.items[0], Rect(1010, 560, 220, 120), b"png")
+    builder.add_template(
+        manifest.items[0],
+        Rect(1010, 560, 220, 120),
+        _make_png((22, 12)),
+    )
     overrides = builder.build().build_pipeline_overrides(manifest)
 
     assert overrides == {
@@ -152,3 +196,14 @@ def test_layout_builder_expands_ocr_roi(tmp_path: Path) -> None:
         "w": 23,
         "h": 23,
     }
+
+
+def _make_png(size: tuple[int, int], color: str = "white") -> bytes:
+    output = BytesIO()
+    Image.new("RGB", size, color).save(output, format="PNG")
+    return output.getvalue()
+
+
+def _png_size(path: Path) -> tuple[int, int]:
+    with Image.open(path) as image:
+        return image.size

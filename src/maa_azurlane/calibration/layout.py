@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from uuid import uuid4
 
+from maa_azurlane.calibration.image import resize_template_to_maa720p
 from maa_azurlane.calibration.manifest import CalibrationItem, CalibrationManifest
 from maa_azurlane.layout import CoordinateTransformer, Rect, Size
 
@@ -106,7 +107,7 @@ class LayoutBuilder:
         self.output_root = Path(output_root)
         self.manifest_version = manifest_version
         self.transformer = CoordinateTransformer(native_size)
-        self.template_scaler = template_scaler or _identity_scaler
+        self.template_scaler = template_scaler or resize_template_to_maa720p
         self._elements: dict[str, LayoutElement] = {}
         self._images: dict[str, bytes] = {}
 
@@ -209,16 +210,6 @@ class LayoutBuilder:
             json.dumps(layout.to_dict(), indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
-
-
-def _identity_scaler(
-    image_bytes: bytes, transformer: CoordinateTransformer
-) -> bytes:
-    if transformer.scale_ratio != 1.0:
-        raise RuntimeError(
-            "template_scaler is required when native height differs from 720"
-        )
-    return image_bytes
 
 
 def _image_path_for(item: CalibrationItem) -> str | None:
