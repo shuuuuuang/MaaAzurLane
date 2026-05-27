@@ -1,12 +1,24 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TypeAlias
+
+RectSequence: TypeAlias = (
+    list[int | float] | tuple[int | float, int | float, int | float, int | float]
+)
 
 
 @dataclass(frozen=True)
 class Size:
     width: int
     height: int
+
+    @classmethod
+    def from_sequence(cls, values: list[int] | tuple[int, int]) -> Size:
+        return cls(width=int(values[0]), height=int(values[1]))
+
+    def to_list(self) -> list[int]:
+        return [self.width, self.height]
 
 
 @dataclass(frozen=True)
@@ -44,3 +56,15 @@ class Rect:
 
     def is_empty(self) -> bool:
         return self.width <= 0 or self.height <= 0
+
+    @classmethod
+    def from_sequence(cls, values: RectSequence) -> Rect:
+        return cls(
+            x=float(values[0]),
+            y=float(values[1]),
+            width=float(values[2]),
+            height=float(values[3]),
+        )
+
+    def to_list(self) -> list[int | float]:
+        return [self.x, self.y, self.width, self.height]

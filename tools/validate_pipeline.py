@@ -1,13 +1,18 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 
 def main() -> int:
-    root = Path(__file__).resolve().parents[1]
+    root = ROOT
     validate_interface(root / "interface.json")
+    validate_calibration(root / "reference/calibration.json")
     for path in sorted(root.glob("resource/pipeline/**/*.json")):
         with path.open("r", encoding="utf-8") as file:
             json.load(file)
@@ -50,6 +55,13 @@ def validate_interface(path: Path) -> None:
             raise ValueError("interface.json task entries require entry")
 
     print(f"valid interface: {path.name}")
+
+
+def validate_calibration(path: Path) -> None:
+    from maa_azurlane.calibration import CalibrationManifest
+
+    CalibrationManifest.load(path)
+    print(f"valid calibration: {path.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,59 @@
+{
+  "version": "0.1.0",
+  "base_resolution": [
+    1280,
+    720
+  ],
+  "game_version": "unknown",
+  "items": [
+    {
+      "id": "main.btn_campaign",
+      "category": "template",
+      "pack": "core",
+      "description": "Main page campaign button.",
+      "how_to_reach": "Open the game and return to the main page.",
+      "reference_image": "main/btn_campaign.png",
+      "reference_roi": [
+        1010,
+        560,
+        220,
+        120
+      ],
+      "repeat": false,
+      "pipeline_refs": [
+        {
+          "node": "MainCampaignButton",
+          "field": "recognition.param.roi"
+        },
+        {
+          "node": "MainCampaignButton",
+          "field": "recognition.param.template"
+        }
+      ],
+      "tags": [
+        "main",
+        "campaign",
+        "navigation"
+      ]
+    },
+    {
+      "id": "main.bottom_menu",
+      "category": "anchor",
+      "pack": "core",
+      "description": "Main page bottom navigation area.",
+      "how_to_reach": "Open the game and return to the main page.",
+      "reference_roi": [
+        0,
+        620,
+        1280,
+        100
+      ],
+      "repeat": false,
+      "pipeline_refs": [],
+      "tags": [
+        "main",
+        "anchor"
+      ]
+    }
+  ]
+}

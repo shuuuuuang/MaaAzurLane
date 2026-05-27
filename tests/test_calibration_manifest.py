@@ -1,0 +1,30 @@
+from pathlib import Path
+
+import pytest
+
+from maa_azurlane.calibration import CalibrationItem, CalibrationManifest
+from maa_azurlane.layout import Rect
+
+
+def test_load_reference_calibration_manifest() -> None:
+    manifest = CalibrationManifest.load(Path("reference/calibration.json"))
+
+    assert manifest.version == "0.1.0"
+    assert manifest.base_resolution.to_list() == [1280, 720]
+    assert [item.id for item in manifest.items] == [
+        "main.btn_campaign",
+        "main.bottom_menu",
+    ]
+    assert manifest.items[0].pipeline_refs[0].node == "MainCampaignButton"
+
+
+def test_template_item_requires_reference_image() -> None:
+    item = CalibrationItem(
+        id="main.invalid",
+        category="template",
+        description="Invalid template.",
+        reference_roi=Rect(0, 0, 100, 100),
+    )
+
+    with pytest.raises(ValueError, match="reference_image"):
+        item.validate()
