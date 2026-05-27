@@ -28,7 +28,7 @@ def test_layout_builder_writes_layout_and_template(tmp_path: Path) -> None:
         "category": "template",
         "native": {"x": 1010, "y": 560, "w": 220, "h": 120},
         "maa720p": {"x": 1010, "y": 560, "w": 220, "h": 120},
-        "image": "image/main/btn_campaign.png",
+        "image": "main/btn_campaign.png",
     }
     assert (output_dir / "image/main/btn_campaign.png").read_bytes() == b"png-bytes"
 
@@ -126,7 +126,7 @@ def test_calibration_layout_builds_pipeline_overrides() -> None:
             "recognition": {
                 "param": {
                     "roi": [1010, 560, 220, 120],
-                    "template": "image/main/btn_campaign.png",
+                    "template": "main/btn_campaign.png",
                 }
             }
         }
