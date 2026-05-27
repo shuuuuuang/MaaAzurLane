@@ -1,96 +1,149 @@
 # Roadmap
 
-## M0: Maa Project Skeleton
+This roadmap follows the local `DESIGN.md` phase plan, with milestone scopes
+adjusted so each phase has a clear engineering acceptance boundary.
 
-- MaaFramework project structure.
-- Project interface draft.
-- Startup, return-home, and placeholder daily pipelines.
-- Logging, screenshots, config, and validation tools.
+## P0: Foundation and Calibration Contract
 
-## M1: Resolution Foundation
+Goal: make the project loadable, testable, and aligned around the calibration
+architecture before gameplay tasks expand.
 
-- Game content-region detection.
-- Logical-to-runtime coordinate mapping.
-- Anchor-based page recognition.
-- Mainstream phone, tablet, and emulator screenshot dataset.
-- Screenshot replay tests.
+- MaaFramework project skeleton and ProjectInterface.
+- CI, validation tools, issue and PR workflow.
+- Coordinate-space terminology and `CoordinateTransformer`.
+- `reference/calibration.json` manifest schema.
+- Initial reference template manifest entries.
+- ADB/controller configuration draft.
+- OCR model placement contract.
+- Local development and validation documentation.
 
-## M2: Daily Baseline
+Acceptance:
 
-- Commissions.
-- Research.
-- Tactical class.
-- Dorm.
-- Mail and mission rewards.
+- `interface.json`, pipeline JSON, and calibration manifests validate locally
+  and in CI.
+- Native-to-Maa720 coordinate conversion is covered for common resolutions.
+- Calibration item IDs are explicitly mapped to pipeline references.
+
+## P1: Calibration System and Core Navigation
+
+Goal: prove the user-side calibration path on real navigation flows.
+
+- Reference templates for common buttons.
+- Calibration wizard prototype.
+- `LayoutBuilder` for layout JSON generation.
+- Template resize into Maa720Space.
+- User calibration data injection through image and pipeline overrides.
+- Main-page recognition and navigation pipeline.
+- Cross-resolution validation for 1280x720, 1920x1080, and 2400x1080.
+- Basic UI integration path, preferably MXU.
+
+Acceptance:
+
+- A calibrated device can return to the main page and navigate to key screens
+  without fixed native-resolution coordinates.
+- Calibration can be resumed or repeated without corrupting existing data.
+
+## P2: Collection Tasks and Basic Scheduler
+
+Goal: deliver the first practical automation value through low-risk collection
+tasks.
+
+- Commission collection and dispatch.
+- Research collection and selection.
+- Tactical class, dorm, meowfficer, guild, shop, build, and retire pipelines.
+- Basic scheduler with cooldown and priority handling.
+- Core Pack and Daily Pack calibration dependencies.
+
+Acceptance:
+
+- Users can run a daily collection loop from calibrated navigation data.
+- Scheduler records next-run times and can resume after interruption.
+
+## P3: Sortie and Battle Core
+
+Goal: implement battle entry flows and the first generation of map navigation.
+
+- Campaign and event entry pipelines.
+- Fleet selection and morale checks.
+- Basic map recognition and navigation custom modules.
+- Emergency commission and repeat sortie support.
+- Oil and resource gate checks.
+
+Acceptance:
+
+- A configured normal or event stage can be entered, completed, and repeated
+  under resource and morale limits.
+
+## P4: Daily Tasks and Scheduler Hardening
+
+Goal: broaden daily gameplay coverage and make scheduling robust.
+
 - Daily raids.
 - Hard mode.
 - Exercise.
+- Submarine stages.
+- War archives.
+- Event daily tasks.
+- Scheduler interruption, resource thresholds, and task insertion.
 
-## M3: Sortie, Events, and Resource Control
+Acceptance:
 
-- Normal stage farming.
-- Event stage farming.
-- Event progression assistance.
-- Fleet selection.
-- Oil and morale checks.
-- Battle result recognition.
-- Drop and reward statistics.
+- Daily task groups can be mixed with collection tasks without blocking or
+  starving higher-priority work.
 
-## M4: Operation Siren
+## P5: Operation Siren
 
+Goal: make Operation Siren a first-class module.
+
+- Operation Siren map scan and navigation custom modules.
 - Daily Operation Siren tasks.
-- Port supply and shop strategy.
-- Hidden zones.
-- Abyssal zones.
-- Stronghold zones.
 - Monthly reset progression.
-- AP control.
-- Corrosion 1 features and statistics.
-- Restriction removal support.
+- Hidden zones, abyssal zones, strongholds, and port supply flows.
+- AP control and Operation Siren specific scheduler strategy.
 
-## M5: Intelligent Scheduling
+Acceptance:
 
-- Priority queue.
-- Cooldown management.
-- Resource-aware task decisions.
-- Daily, weekly, and event task mixing.
-- Retry, pause, skip, and recovery policy.
-- Queue visualization.
+- Daily and monthly Operation Siren flows can run with recoverable navigation
+  and state tracking.
 
-## M6: OCR and Models
+## P6: AzurPilot Advanced Features and External Control
 
-- Custom OCR adapters.
-- Chinese and global server recognition.
-- Ship level recognition.
-- Resource number recognition.
-- Task and stage name recognition.
-- Optional GPU inference.
-- Offline OCR evaluation set.
+Goal: catch up with AzurPilot-inspired advanced automation and expose external
+control surfaces.
 
-## M7: Emulator and Multi-instance Management
-
-- Emulator start and stop.
-- ADB restart.
-- Resolution detection.
-- Multi-instance configuration.
-- Remote ADB and cloud-phone exploration.
-
-## M8: MCP and External Control
-
+- Island plan.
+- Co-op and special event flows.
+- Operation Siren advanced strategy such as Monte Carlo style planning.
+- Equipment box dismantling.
+- Corrosion 1 auto fleet planning.
+- Siren research device support.
+- Timed restart.
 - MCP service.
-- Instance status.
-- Task listing and triggering.
-- Queue inspection.
-- Screenshot and log retrieval.
-- Config update.
-- Runtime restart and update hooks.
 
-## M9: User Experience and Release
+Acceptance:
 
-- Maa GUI integration.
-- Optional launcher.
-- ALAS/AzurPilot configuration migration.
-- Task templates.
-- Log bundle generation.
-- Auto update.
-- Stable, beta, and nightly channels.
+- Advanced modules are opt-in, risk-labelled, and externally observable.
+
+## P7: Stability, Multi-server, and Ecosystem
+
+Goal: prepare for public long-running use and community contribution.
+
+- CN, EN, JP, and TW server adaptation.
+- Multi-resolution regression test sets.
+- `CalibrationHealth` and incremental recalibration.
+- Community calibration sharing design.
+- Documentation for MaaDebugger and MaaPipelineEditor workflows.
+- Release channels and migration guides.
+
+Acceptance:
+
+- The project has repeatable regression coverage, health checks, and enough
+  documentation for external contributors to extend modules safely.
+
+## Calendar Target
+
+- 2026 Q2: P0.
+- 2026 Q3: P1 and P2.
+- 2026 Q4: P3, P4, community calibration library, and v0.5 Alpha.
+- 2027 Q1: P5, P6, and v0.8 Beta.
+- 2027 Q2: P7 and v1.0.
