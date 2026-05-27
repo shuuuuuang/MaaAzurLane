@@ -5,6 +5,9 @@ description = "MaaFramework-based automation project for Azur Lane."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "GPL-3.0-only" }
+dependencies = [
+    "Pillow>=10.0",
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

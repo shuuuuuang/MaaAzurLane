@@ -1,8 +1,10 @@
 import json
 from dataclasses import dataclass, field
+from io import BytesIO
 from pathlib import Path
 
 import pytest
+from PIL import Image
 
 from maa_azurlane.calibration import (
     CalibrationInjector,
@@ -37,7 +39,7 @@ def test_calibration_injector_overrides_images_and_pipeline(
     builder.add_template(
         manifest.items[0],
         Rect(1010, 560, 220, 120),
-        b"campaign",
+        _make_png((22, 12)),
         variants=["main/btn_campaign_pressed"],
     )
     layout_dir = builder.flush()
@@ -55,10 +57,12 @@ def test_calibration_injector_overrides_images_and_pipeline(
     ]
     assert result.pipeline_nodes == ["MainCampaignButton"]
     assert result.missing_images == []
-    assert resource.images == {
-        "main/btn_campaign.png": b"campaign",
-        "main/btn_campaign_pressed.png": b"campaign",
+    assert set(resource.images) == {
+        "main/btn_campaign.png",
+        "main/btn_campaign_pressed.png",
     }
+    assert resource.images["main/btn_campaign.png"].startswith(b"\x89PNG")
+    assert resource.images["main/btn_campaign_pressed.png"].startswith(b"\x89PNG")
     assert resource.pipelines == [
         {
             "MainCampaignButton": {
@@ -83,7 +87,11 @@ def test_calibration_injector_reports_missing_images_in_non_strict_mode(
         manifest_version=manifest.version,
         output_root=tmp_path,
     )
-    builder.add_template(manifest.items[0], Rect(1010, 560, 220, 120), b"campaign")
+    builder.add_template(
+        manifest.items[0],
+        Rect(1010, 560, 220, 120),
+        _make_png((22, 12)),
+    )
     layout_dir = builder.flush()
     (layout_dir / "image/main/btn_campaign.png").unlink()
 
@@ -112,7 +120,11 @@ def test_calibration_injector_raises_on_missing_images_by_default(
         manifest_version=manifest.version,
         output_root=tmp_path,
     )
-    builder.add_template(manifest.items[0], Rect(1010, 560, 220, 120), b"campaign")
+    builder.add_template(
+        manifest.items[0],
+        Rect(1010, 560, 220, 120),
+        _make_png((22, 12)),
+    )
     layout_dir = builder.flush()
     (layout_dir / "image/main/btn_campaign.png").unlink()
 
@@ -122,3 +134,9 @@ def test_calibration_injector_raises_on_missing_images_by_default(
             builder.build(),
             layout_dir,
         )
+
+
+def _make_png(size: tuple[int, int]) -> bytes:
+    output = BytesIO()
+    Image.new("RGB", size, "white").save(output, format="PNG")
+    return output.getvalue()
