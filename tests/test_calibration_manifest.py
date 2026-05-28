@@ -15,6 +15,7 @@ def test_load_reference_calibration_manifest() -> None:
         "main.btn_campaign",
         "main.bottom_menu",
     ]
+    assert manifest.items[0].reference_roi.to_list() == [1021.0, 292.0, 139.0, 140.0]
     assert manifest.items[0].pipeline_refs[0].node == "MainCampaignButton"
 
 

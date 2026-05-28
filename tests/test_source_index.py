@@ -15,6 +15,10 @@ def test_load_reference_source_index() -> None:
         "main.btn_campaign",
         "main.bottom_menu",
     ]
+    campaign = index.assets[0]
+    assert campaign.upstream == "azurpilot"
+    assert campaign.source_path == "assets/cn/ui/MAIN_GOTO_CAMPAIGN.BUTTON.png"
+    assert campaign.status == "modified"
 
 
 def test_copied_asset_requires_upstream_and_source_path() -> None:
