@@ -13,12 +13,19 @@ def test_load_reference_source_index() -> None:
     assert [source.license for source in index.upstreams] == ["GPL-3.0", "GPL-3.0"]
     assert [asset.id for asset in index.assets] == [
         "main.btn_campaign",
+        "main.btn_build",
+        "main.btn_mission",
+        "main.btn_shop",
+        "main.btn_dock",
+        "main.btn_fleet",
         "main.bottom_menu",
     ]
     campaign = index.assets[0]
     assert campaign.upstream == "azurpilot"
     assert campaign.source_path == "assets/cn/ui/MAIN_GOTO_CAMPAIGN.BUTTON.png"
     assert campaign.status == "modified"
+    fleet = index.assets[5]
+    assert fleet.source_path == "assets/cn/ui/MAIN_GOTO_FLEET.BUTTON.png"
 
 
 def test_copied_asset_requires_upstream_and_source_path() -> None:
