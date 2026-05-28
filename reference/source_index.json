@@ -31,6 +31,61 @@
       "notes": "Cropped from the 1280x720 upstream button snapshot using AzurPilot's CN button rectangle (1021,292)-(1160,432)."
     },
     {
+      "id": "main.btn_build",
+      "kind": "template",
+      "target_path": "reference/image/main/btn_build.png",
+      "upstream": "azurpilot",
+      "source_path": "assets/cn/ui/MAIN_GOTO_BUILD.png",
+      "license": "GPL-3.0",
+      "status": "modified",
+      "usage": "Reference template for the main-page build button calibration item.",
+      "notes": "Cropped from the 1280x720 upstream snapshot using AzurPilot's CN button rectangle (958,665)-(1113,714)."
+    },
+    {
+      "id": "main.btn_mission",
+      "kind": "template",
+      "target_path": "reference/image/main/btn_mission.png",
+      "upstream": "azurpilot",
+      "source_path": "assets/cn/ui/MAIN_GOTO_MISSION.png",
+      "license": "GPL-3.0",
+      "status": "modified",
+      "usage": "Reference template for the main-page mission button calibration item.",
+      "notes": "Cropped from the 1280x720 upstream snapshot using AzurPilot's CN button rectangle (816,666)-(932,713)."
+    },
+    {
+      "id": "main.btn_shop",
+      "kind": "template",
+      "target_path": "reference/image/main/btn_shop.png",
+      "upstream": "azurpilot",
+      "source_path": "assets/cn/ui/MAIN_GOTO_SHOP.png",
+      "license": "GPL-3.0",
+      "status": "modified",
+      "usage": "Reference template for the main-page shop button calibration item.",
+      "notes": "Cropped from the 1280x720 upstream snapshot using AzurPilot's CN button rectangle (11,662)-(165,713)."
+    },
+    {
+      "id": "main.btn_dock",
+      "kind": "template",
+      "target_path": "reference/image/main/btn_dock.png",
+      "upstream": "azurpilot",
+      "source_path": "assets/cn/ui/MAIN_GOTO_DOCK.png",
+      "license": "GPL-3.0",
+      "status": "modified",
+      "usage": "Reference template for the main-page dock button calibration item.",
+      "notes": "Cropped from the 1280x720 upstream snapshot using AzurPilot's CN button rectangle (172,668)-(326,715)."
+    },
+    {
+      "id": "main.btn_fleet",
+      "kind": "template",
+      "target_path": "reference/image/main/btn_fleet.png",
+      "upstream": "azurpilot",
+      "source_path": "assets/cn/ui/MAIN_GOTO_FLEET.BUTTON.png",
+      "license": "GPL-3.0",
+      "status": "modified",
+      "usage": "Reference template for the main-page fleet button calibration item.",
+      "notes": "Cropped from the 1280x720 upstream button snapshot using AzurPilot's CN button rectangle (749,364)-(992,430)."
+    },
+    {
       "id": "main.bottom_menu",
       "kind": "anchor",
       "target_path": "resource/config/anchors/home.json",

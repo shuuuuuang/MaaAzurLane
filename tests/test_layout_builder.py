@@ -179,7 +179,7 @@ def test_calibration_layout_builds_pipeline_overrides() -> None:
 
 def test_layout_builder_expands_ocr_roi(tmp_path: Path) -> None:
     manifest = CalibrationManifest.load(Path("reference/calibration.json"))
-    item = manifest.items[1]
+    item = next(item for item in manifest.items if item.id == "main.bottom_menu")
     builder = LayoutBuilder(
         "device-1080p",
         Size(1920, 1080),

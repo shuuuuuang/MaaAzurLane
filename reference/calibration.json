@@ -37,6 +37,156 @@
       ]
     },
     {
+      "id": "main.btn_build",
+      "category": "template",
+      "pack": "core",
+      "description": "Main page build button.",
+      "how_to_reach": "Open the game and return to the main page.",
+      "reference_image": "main/btn_build.png",
+      "reference_roi": [
+        958,
+        665,
+        155,
+        49
+      ],
+      "repeat": false,
+      "pipeline_refs": [
+        {
+          "node": "MainBuildButton",
+          "field": "recognition.param.roi"
+        },
+        {
+          "node": "MainBuildButton",
+          "field": "recognition.param.template"
+        }
+      ],
+      "tags": [
+        "main",
+        "build",
+        "navigation"
+      ]
+    },
+    {
+      "id": "main.btn_mission",
+      "category": "template",
+      "pack": "core",
+      "description": "Main page mission button.",
+      "how_to_reach": "Open the game and return to the main page.",
+      "reference_image": "main/btn_mission.png",
+      "reference_roi": [
+        816,
+        666,
+        116,
+        47
+      ],
+      "repeat": false,
+      "pipeline_refs": [
+        {
+          "node": "MainMissionButton",
+          "field": "recognition.param.roi"
+        },
+        {
+          "node": "MainMissionButton",
+          "field": "recognition.param.template"
+        }
+      ],
+      "tags": [
+        "main",
+        "mission",
+        "navigation"
+      ]
+    },
+    {
+      "id": "main.btn_shop",
+      "category": "template",
+      "pack": "core",
+      "description": "Main page shop button.",
+      "how_to_reach": "Open the game and return to the main page.",
+      "reference_image": "main/btn_shop.png",
+      "reference_roi": [
+        11,
+        662,
+        154,
+        51
+      ],
+      "repeat": false,
+      "pipeline_refs": [
+        {
+          "node": "MainShopButton",
+          "field": "recognition.param.roi"
+        },
+        {
+          "node": "MainShopButton",
+          "field": "recognition.param.template"
+        }
+      ],
+      "tags": [
+        "main",
+        "shop",
+        "navigation"
+      ]
+    },
+    {
+      "id": "main.btn_dock",
+      "category": "template",
+      "pack": "core",
+      "description": "Main page dock button.",
+      "how_to_reach": "Open the game and return to the main page.",
+      "reference_image": "main/btn_dock.png",
+      "reference_roi": [
+        172,
+        668,
+        154,
+        47
+      ],
+      "repeat": false,
+      "pipeline_refs": [
+        {
+          "node": "MainDockButton",
+          "field": "recognition.param.roi"
+        },
+        {
+          "node": "MainDockButton",
+          "field": "recognition.param.template"
+        }
+      ],
+      "tags": [
+        "main",
+        "dock",
+        "navigation"
+      ]
+    },
+    {
+      "id": "main.btn_fleet",
+      "category": "template",
+      "pack": "core",
+      "description": "Main page fleet button.",
+      "how_to_reach": "Open the game and return to the main page.",
+      "reference_image": "main/btn_fleet.png",
+      "reference_roi": [
+        749,
+        364,
+        243,
+        66
+      ],
+      "repeat": false,
+      "pipeline_refs": [
+        {
+          "node": "MainFleetButton",
+          "field": "recognition.param.roi"
+        },
+        {
+          "node": "MainFleetButton",
+          "field": "recognition.param.template"
+        }
+      ],
+      "tags": [
+        "main",
+        "fleet",
+        "navigation"
+      ]
+    },
+    {
       "id": "main.bottom_menu",
       "category": "anchor",
       "pack": "core",
