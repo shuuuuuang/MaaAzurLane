@@ -75,3 +75,10 @@ python tools/replay_screenshot.py tests/screenshots
 
 Contributors should remove or mask account-private information before sharing
 screenshots publicly.
+
+## Upstream Assets
+
+Screenshots or templates adapted from AzurLaneAutoScript or AzurPilot must be
+registered in `reference/source_index.json`. See
+[asset-sources.md](asset-sources.md) for the required upstream, license, and
+source path fields.
