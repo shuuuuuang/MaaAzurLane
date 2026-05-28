@@ -61,14 +61,31 @@ def validate_interface(path: Path) -> None:
 def validate_calibration(path: Path) -> None:
     from maa_azurlane.calibration import CalibrationManifest
 
-    CalibrationManifest.load(path)
+    manifest = CalibrationManifest.load(path)
+    image_root = path.parent / "image"
+    for item in manifest.items:
+        if item.reference_image:
+            image_path = image_root / item.reference_image
+            if not image_path.exists():
+                raise FileNotFoundError(
+                    f"missing reference image for {item.id}: "
+                    f"{image_path.relative_to(ROOT)}"
+                )
     print(f"valid calibration: {path.relative_to(ROOT)}")
 
 
 def validate_source_index(path: Path) -> None:
     from maa_azurlane.calibration import SourceIndex
 
-    SourceIndex.load(path)
+    index = SourceIndex.load(path)
+    for asset in index.assets:
+        if asset.status == "placeholder":
+            continue
+        target = ROOT / asset.target_path
+        if not target.exists():
+            raise FileNotFoundError(
+                f"missing source-index target for {asset.id}: {asset.target_path}"
+            )
     print(f"valid source index: {path.relative_to(ROOT)}")
 
 

@@ -23,12 +23,12 @@
       "id": "main.btn_campaign",
       "kind": "template",
       "target_path": "reference/image/main/btn_campaign.png",
-      "upstream": null,
-      "source_path": null,
-      "license": "GPL-3.0-only",
-      "status": "placeholder",
+      "upstream": "azurpilot",
+      "source_path": "assets/cn/ui/MAIN_GOTO_CAMPAIGN.BUTTON.png",
+      "license": "GPL-3.0",
+      "status": "modified",
       "usage": "Reference template for the main-page campaign button calibration item.",
-      "notes": "No binary template has been committed yet; record the upstream source before adding one."
+      "notes": "Cropped from the 1280x720 upstream button snapshot using AzurPilot's CN button rectangle (1021,292)-(1160,432)."
     },
     {
       "id": "main.bottom_menu",
