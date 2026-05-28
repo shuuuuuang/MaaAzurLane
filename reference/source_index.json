@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "upstreams": [
+    {
+      "id": "alas",
+      "name": "AzurLaneAutoScript",
+      "repository": "https://github.com/LmeSzinc/AzurLaneAutoScript",
+      "license": "GPL-3.0",
+      "license_url": "https://github.com/LmeSzinc/AzurLaneAutoScript/blob/master/LICENSE",
+      "notes": "Primary reference for mature Azur Lane automation flows and existing image assets."
+    },
+    {
+      "id": "azurpilot",
+      "name": "AzurPilot",
+      "repository": "https://github.com/wess09/AzurPilot",
+      "license": "GPL-3.0",
+      "license_url": "https://github.com/wess09/AzurPilot/blob/master/LICENSE",
+      "notes": "Primary reference for AzurPilot feature coverage and additional automation scripts."
+    }
+  ],
+  "assets": [
+    {
+      "id": "main.btn_campaign",
+      "kind": "template",
+      "target_path": "reference/image/main/btn_campaign.png",
+      "upstream": null,
+      "source_path": null,
+      "license": "GPL-3.0-only",
+      "status": "placeholder",
+      "usage": "Reference template for the main-page campaign button calibration item.",
+      "notes": "No binary template has been committed yet; record the upstream source before adding one."
+    },
+    {
+      "id": "main.bottom_menu",
+      "kind": "anchor",
+      "target_path": "resource/config/anchors/home.json",
+      "upstream": null,
+      "source_path": null,
+      "license": "GPL-3.0-only",
+      "status": "derived",
+      "usage": "Local anchor definition for the main-page bottom navigation area.",
+      "notes": "Defined locally from the calibration contract rather than copied from an upstream asset."
+    }
+  ]
+}

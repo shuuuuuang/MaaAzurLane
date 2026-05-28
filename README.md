@@ -33,6 +33,13 @@ custom OCR models, GPU inference, and emulator management are long-term goals.
 See [docs/development.md](docs/development.md) for local setup and validation
 commands.
 
+## Asset Sources
+
+Reference screenshots and templates may be adapted from compatible GPL-3.0
+upstreams such as AzurLaneAutoScript and AzurPilot. Every committed asset must
+be recorded in [reference/source_index.json](reference/source_index.json); see
+[docs/asset-sources.md](docs/asset-sources.md).
+
 ## Status
 
 This repository is in the planning and scaffolding stage.

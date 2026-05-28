@@ -13,6 +13,7 @@ def main() -> int:
     root = ROOT
     validate_interface(root / "interface.json")
     validate_calibration(root / "reference/calibration.json")
+    validate_source_index(root / "reference/source_index.json")
     for path in sorted(root.glob("resource/pipeline/**/*.json")):
         with path.open("r", encoding="utf-8") as file:
             json.load(file)
@@ -62,6 +63,13 @@ def validate_calibration(path: Path) -> None:
 
     CalibrationManifest.load(path)
     print(f"valid calibration: {path.relative_to(ROOT)}")
+
+
+def validate_source_index(path: Path) -> None:
+    from maa_azurlane.calibration import SourceIndex
+
+    SourceIndex.load(path)
+    print(f"valid source index: {path.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
